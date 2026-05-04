@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arcticom — Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: { extend: { colors: { teal: '#1D9E75', 'teal-light': '#e6f7f2', purple: '#534AB7' } } }
+}
+</script>
+<style>
+  body { font-family: 'Inter', -apple-system, sans-serif; }
+  .tab-active { border-bottom: 2px solid #1D9E75; color: #1D9E75; }
+  .nav-active { background: #1D9E75; color: white; }
+  .nav-inactive { color: #94a3b8; }
+  .nav-inactive:hover { background: #1e2d3d; color: #cbd5e1; }
+</style>
+</head>
+<body class="bg-slate-50 text-sm flex h-screen overflow-hidden">
+
+<!-- SIDEBAR -->
+<aside class="w-60 flex-shrink-0 bg-slate-900 flex flex-col h-full">
+  <!-- Logo -->
+  <div class="px-5 py-4 border-b border-slate-700 flex items-center gap-2.5">
+    <div class="w-7 h-7 rounded-md bg-[#1D9E75] flex items-center justify-center flex-shrink-0">
+      <svg width="14" height="14" fill="white" viewBox="0 0 24 24"><path d="M12 2l3 9H7l3-9zm0 20l-3-9h6l-3 9zM2 12l9-3v6L2 12zm20 0l-9 3V9l9 3z"/></svg>
+    </div>
+    <span class="text-white font-semibold text-[15px] tracking-tight">Arcticom</span>
+  </div>
+
+  <!-- Company switcher -->
+  <div class="px-3 py-2.5 border-b border-slate-700">
+    <button class="w-full flex items-center justify-between px-3 py-2 rounded-md bg-slate-800 text-slate-300 text-xs hover:bg-slate-700 transition-colors">
+      <span>Arctic Pacific — West</span>
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+  </div>
+
+  <!-- Nav -->
+  <nav class="flex-1 px-3 py-3 flex flex-col gap-0.5">
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium nav-active">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium nav-inactive transition-colors">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      My estimates
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium nav-inactive transition-colors">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      Data repository
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium nav-inactive transition-colors">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      AI insights
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium nav-inactive transition-colors">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Reports
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium nav-inactive transition-colors">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Users &amp; roles
+    </a>
+    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium nav-inactive transition-colors">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      Settings
+    </a>
+  </nav>
+
+  <!-- User chip -->
+  <div class="border-t border-slate-700 px-4 py-4 flex items-center gap-2.5">
+    <div class="w-7 h-7 rounded-full bg-[#1D9E75] flex items-center justify-center text-white text-[11px] font-semibold flex-shrink-0">JM</div>
+    <div class="flex-1 min-w-0">
+      <p class="text-slate-100 text-xs font-medium truncate">Jamie Morales</p>
+      <p class="text-slate-400 text-[10px] truncate">Senior Estimator</p>
+    </div>
+    <svg width="12" height="12" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+  <!-- Top bar -->
+  <header class="h-14 bg-white border-b border-slate-200 flex items-center px-6 gap-4 flex-shrink-0">
+    <h1 class="text-[15px] font-semibold text-slate-800 flex-shrink-0">Dashboard</h1>
+    <div class="relative max-w-xs w-full">
+      <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input placeholder="Search estimates, projects..." class="w-full pl-8 pr-3 h-8 text-xs bg-slate-50 border border-slate-200 rounded-md focus:outline-none focus:border-[#1D9E75]">
+    </div>
+    <div class="ml-auto flex items-center gap-3">
+      <div class="relative">
+        <svg width="18" height="18" fill="none" stroke="#64748b" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full"></span>
+      </div>
+      <div class="w-7 h-7 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 text-xs font-semibold">JM</div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="flex-1 overflow-y-auto px-6 py-5">
+
+    <!-- KPI strip -->
+    <div class="grid grid-cols-4 gap-4 mb-7">
+      <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4">
+        <p class="text-xs text-slate-500 mb-1">Active bids</p>
+        <p class="text-2xl font-bold text-slate-800 mb-1">23</p>
+        <p class="text-[11px] text-emerald-600">↑ +4 this week</p>
+      </div>
+      <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4">
+        <p class="text-xs text-slate-500 mb-1">Pipeline value</p>
+        <p class="text-2xl font-bold text-slate-800 mb-1">$4.2M</p>
+        <p class="text-[11px] text-emerald-600">↑ +12% vs last quarter</p>
+      </div>
+      <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4">
+        <p class="text-xs text-slate-500 mb-1">Win rate (90d)</p>
+        <p class="text-2xl font-bold text-slate-800 mb-1">34%</p>
+        <p class="text-[11px] text-red-500">↓ -2pts vs prior period</p>
+      </div>
+      <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4">
+        <p class="text-xs text-slate-500 mb-1">Avg margin</p>
+        <p class="text-2xl font-bold text-slate-800 mb-1">22.1%</p>
+        <p class="text-[11px] text-emerald-600">↑ +0.8pts vs target</p>
+      </div>
+    </div>
+
+    <!-- Start a new estimate -->
+    <div class="mb-8">
+      <h2 class="text-sm font-semibold text-slate-700 mb-3">Start a new estimate</h2>
+      <div class="grid grid-cols-4 gap-3">
+        <!-- CR-01 highlighted -->
+        <div class="bg-white rounded-lg border-2 border-[#1D9E75] ring-1 ring-[#1D9E75]/20 shadow-sm p-4 cursor-pointer hover:shadow-md transition-shadow">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-md bg-[#e6f7f2] flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" fill="none" stroke="#1D9E75" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-slate-700 leading-snug mb-1.5">Commercial Refrigeration Installation</p>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[10px] font-bold bg-[#1D9E75] text-white px-1.5 py-0.5 rounded">CR-01</span>
+                <span class="text-[10px] text-slate-400">Multi-tab</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- IR-02 -->
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4 cursor-pointer hover:shadow-md hover:border-slate-300 transition-all">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-md bg-slate-100 flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-slate-700 leading-snug mb-1.5">Industrial Refrigeration Systems</p>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[10px] font-bold bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded">IR-02</span>
+                <span class="text-[10px] text-slate-400">Complex assembly</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- HV-03 -->
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4 cursor-pointer hover:shadow-md hover:border-slate-300 transition-all">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-md bg-slate-100 flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-slate-700 leading-snug mb-1.5">HVAC Infrastructure</p>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[10px] font-bold bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded">HV-03</span>
+                <span class="text-[10px] text-slate-400">Multi-trade</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- SR-04 -->
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4 cursor-pointer hover:shadow-md hover:border-slate-300 transition-all">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-md bg-slate-100 flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-slate-700 leading-snug mb-1.5">System Retrofit &amp; Replacement</p>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[10px] font-bold bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded">SR-04</span>
+                <span class="text-[10px] text-slate-400">Replacement scope</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- CS-05 -->
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4 cursor-pointer hover:shadow-md hover:border-slate-300 transition-all">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-md bg-slate-100 flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-slate-700 leading-snug mb-1.5">Cold Storage &amp; Distribution</p>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[10px] font-bold bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded">CS-05</span>
+                <span class="text-[10px] text-slate-400">Distribution</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ES-06 -->
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4 cursor-pointer hover:shadow-md hover:border-slate-300 transition-all">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-md bg-slate-100 flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-slate-700 leading-snug mb-1.5">Energy Services</p>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[10px] font-bold bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded">ES-06</span>
+                <span class="text-[10px] text-slate-400">Single-trade</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- SM-07 -->
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-4 cursor-pointer hover:shadow-md hover:border-slate-300 transition-all">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-md bg-slate-100 flex items-center justify-center flex-shrink-0">
+              <svg width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <div>
+              <p class="text-xs font-semibold text-slate-700 leading-snug mb-1.5">Service &amp; Maintenance</p>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[10px] font-bold bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded">SM-07</span>
+                <span class="text-[10px] text-slate-400">Simple inputs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Separator -->
+    <div class="border-t border-slate-200 mb-7"></div>
+
+    <!-- Continue where you left off -->
+    <div>
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-sm font-semibold text-slate-700">Continue where you left off</h2>
+        <button class="text-xs text-[#1D9E75] font-medium flex items-center gap-1 hover:underline">View all →</button>
+      </div>
+      <div class="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+        <table class="w-full">
+          <thead>
+            <tr class="border-b border-slate-100 bg-slate-50">
+              <th class="text-left text-[11px] font-medium text-slate-400 px-4 py-3">Project</th>
+              <th class="text-left text-[11px] font-medium text-slate-400 px-4 py-3">Form type</th>
+              <th class="text-left text-[11px] font-medium text-slate-400 px-4 py-3">Last updated</th>
+              <th class="text-right text-[11px] font-medium text-slate-400 px-4 py-3">Est. value</th>
+              <th class="text-left text-[11px] font-medium text-slate-400 px-4 py-3">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-slate-50 hover:bg-slate-50 cursor-pointer transition-colors">
+              <td class="px-4 py-3"><div class="flex items-center gap-2.5"><span class="text-[10px] font-bold text-white bg-[#1D9E75] px-1.5 py-0.5 rounded">CR-01</span><span class="text-sm font-medium text-slate-700">Denver Cold Storage Expansion</span></div></td>
+              <td class="px-4 py-3 text-xs text-slate-500">Commercial Refrigeration Installation</td>
+              <td class="px-4 py-3 text-xs text-slate-400">2h ago</td>
+              <td class="px-4 py-3 text-right text-sm font-semibold text-slate-700">$284,000</td>
+              <td class="px-4 py-3"><span class="text-[11px] font-medium px-2 py-0.5 rounded-full bg-amber-100 text-amber-700">In review</span></td>
+            </tr>
+            <tr class="border-b border-slate-50 hover:bg-slate-50 cursor-pointer transition-colors bg-slate-50/40">
+              <td class="px-4 py-3"><div class="flex items-center gap-2.5"><span class="text-[10px] font-bold text-white bg-sky-600 px-1.5 py-0.5 rounded">IR-02</span><span class="text-sm font-medium text-slate-700">Phoenix Industrial Freeze Tunnel</span></div></td>
+              <td class="px-4 py-3 text-xs text-slate-500">Industrial Refrigeration Systems</td>
+              <td class="px-4 py-3 text-xs text-slate-400">Yesterday</td>
+              <td class="px-4 py-3 text-right text-sm font-semibold text-slate-700">$1,140,000</td>
+              <td class="px-4 py-3"><span class="text-[11px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Draft</span></td>
+            </tr>
+            <tr class="border-b border-slate-50 hover:bg-slate-50 cursor-pointer transition-colors">
+              <td class="px-4 py-3"><div class="flex items-center gap-2.5"><span class="text-[10px] font-bold text-white bg-violet-600 px-1.5 py-0.5 rounded">HV-03</span><span class="text-sm font-medium text-slate-700">Chicago Distribution Hub HVAC</span></div></td>
+              <td class="px-4 py-3 text-xs text-slate-500">HVAC Infrastructure</td>
+              <td class="px-4 py-3 text-xs text-slate-400">3d ago</td>
+              <td class="px-4 py-3 text-right text-sm font-semibold text-slate-700">$620,500</td>
+              <td class="px-4 py-3"><span class="text-[11px] font-medium px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">Submitted</span></td>
+            </tr>
+            <tr class="border-b border-slate-50 hover:bg-slate-50 cursor-pointer transition-colors bg-slate-50/40">
+              <td class="px-4 py-3"><div class="flex items-center gap-2.5"><span class="text-[10px] font-bold text-white bg-orange-600 px-1.5 py-0.5 rounded">SR-04</span><span class="text-sm font-medium text-slate-700">Seattle Supermarket Retrofit</span></div></td>
+              <td class="px-4 py-3 text-xs text-slate-500">System Retrofit &amp; Replacement</td>
+              <td class="px-4 py-3 text-xs text-slate-400">5d ago</td>
+              <td class="px-4 py-3 text-right text-sm font-semibold text-slate-700">$198,000</td>
+              <td class="px-4 py-3"><span class="text-[11px] font-medium px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700">Won</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50 cursor-pointer transition-colors">
+              <td class="px-4 py-3"><div class="flex items-center gap-2.5"><span class="text-[10px] font-bold text-white bg-cyan-600 px-1.5 py-0.5 rounded">CS-05</span><span class="text-sm font-medium text-slate-700">Atlanta Produce Distribution</span></div></td>
+              <td class="px-4 py-3 text-xs text-slate-500">Cold Storage &amp; Distribution</td>
+              <td class="px-4 py-3 text-xs text-slate-400">1w ago</td>
+              <td class="px-4 py-3 text-right text-sm font-semibold text-slate-700">$875,000</td>
+              <td class="px-4 py-3"><span class="text-[11px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">Draft</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>

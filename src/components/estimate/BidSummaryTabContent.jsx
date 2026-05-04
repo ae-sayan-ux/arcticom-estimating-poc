@@ -15,7 +15,7 @@ export function BidSummaryTabContent({ issues, summaryRows, onGoToField, templat
   const issueById = new Map(issues.map((i) => [i.id, i]))
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-6 space-y-4">
+    <div className="w-full min-w-0 max-w-none px-4 py-6 sm:px-6 lg:px-8 space-y-4">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h2 className="text-sm font-semibold text-slate-800">Bid summary</h2>

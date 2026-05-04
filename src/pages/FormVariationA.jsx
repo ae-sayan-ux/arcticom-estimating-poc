@@ -113,7 +113,7 @@ export default function FormVariationA() {
         </div>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="flex flex-col min-h-[calc(100vh-88px)]">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="flex w-full min-w-0 flex-col min-h-[calc(100vh-88px)]">
         <div className="bg-white border-b border-slate-200 px-6">
           <TabsList className="h-auto bg-transparent p-0 gap-0 w-full justify-start rounded-none">
             {CR01_MAIN_TABS.map(({ label, value }) => (
@@ -133,7 +133,7 @@ export default function FormVariationA() {
           </TabsList>
         </div>
 
-        <TabsContent value={CR01_TAB.ESTIMATE} className="mt-0 flex-1 p-0 data-[state=inactive]:hidden">
+        <TabsContent value={CR01_TAB.ESTIMATE} className="mt-0 w-full min-w-0 flex-1 p-0 data-[state=inactive]:hidden">
           <div className="flex gap-0 max-w-full">
             <div className="flex-1 px-6 py-5 overflow-y-auto min-w-0">
               <section className="mb-6">
@@ -524,15 +524,15 @@ export default function FormVariationA() {
           </div>
         </TabsContent>
 
-        <TabsContent value={CR01_TAB.EQUIPMENT} className="mt-0 flex-1 bg-white data-[state=inactive]:hidden">
+        <TabsContent value={CR01_TAB.EQUIPMENT} className="mt-0 w-full min-w-0 flex-1 bg-white data-[state=inactive]:hidden">
           <EquipmentScheduleMock layout="table" />
         </TabsContent>
 
-        <TabsContent value={CR01_TAB.LABOR} className="mt-0 flex-1 bg-white data-[state=inactive]:hidden">
+        <TabsContent value={CR01_TAB.LABOR} className="mt-0 w-full min-w-0 flex-1 bg-white data-[state=inactive]:hidden">
           <LaborBreakdownMock layout="table" />
         </TabsContent>
 
-        <TabsContent value={CR01_TAB.SUMMARY} className="mt-0 flex-1 bg-slate-50/80 data-[state=inactive]:hidden">
+        <TabsContent value={CR01_TAB.SUMMARY} className="mt-0 w-full min-w-0 flex-1 bg-slate-50/80 data-[state=inactive]:hidden">
           <BidSummaryTabContent
             issues={issues}
             summaryRows={summaryRows}

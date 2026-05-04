@@ -113,7 +113,7 @@ export default function FormVariationC() {
         </div>
       </div>
 
-      <Tabs value={f.activeTab} onValueChange={f.setActiveTab} className="flex flex-col min-h-[calc(100vh-72px)]">
+      <Tabs value={f.activeTab} onValueChange={f.setActiveTab} className="flex w-full min-w-0 flex-col min-h-[calc(100vh-72px)]">
         <div className="bg-white border-b border-slate-200 px-5">
           <TabsList className="h-auto bg-transparent p-0 gap-0 w-full justify-start rounded-none">
             {CR01_MAIN_TABS.map(({ label, value }) => (
@@ -133,7 +133,7 @@ export default function FormVariationC() {
           </TabsList>
         </div>
 
-        <TabsContent value={CR01_TAB.ESTIMATE} className="mt-0 flex-1 p-0">
+        <TabsContent value={CR01_TAB.ESTIMATE} className="mt-0 w-full min-w-0 flex-1 p-0">
           <div className="flex">
             <div className="flex-1 min-w-0 overflow-x-auto">
               <div className="border-b border-slate-200 bg-slate-50/40 px-5 py-3">
@@ -453,15 +453,15 @@ export default function FormVariationC() {
           </div>
         </TabsContent>
 
-        <TabsContent value={CR01_TAB.EQUIPMENT} className="mt-0 flex-1 bg-white">
+        <TabsContent value={CR01_TAB.EQUIPMENT} className="mt-0 w-full min-w-0 flex-1 bg-white">
           <EquipmentScheduleMock layout="dense" />
         </TabsContent>
 
-        <TabsContent value={CR01_TAB.LABOR} className="mt-0 flex-1 bg-white">
+        <TabsContent value={CR01_TAB.LABOR} className="mt-0 w-full min-w-0 flex-1 bg-white">
           <LaborBreakdownMock layout="dense" />
         </TabsContent>
 
-        <TabsContent value={CR01_TAB.SUMMARY} className="mt-0 flex-1 bg-slate-50/80">
+        <TabsContent value={CR01_TAB.SUMMARY} className="mt-0 w-full min-w-0 flex-1 bg-slate-50/80">
           <BidSummaryTabContent issues={f.issues} summaryRows={f.summaryRows} onGoToField={f.goToField} templateVersion={f.pinnedVersion} />
         </TabsContent>
       </Tabs>

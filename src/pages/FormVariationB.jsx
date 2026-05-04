@@ -203,7 +203,7 @@ export default function FormVariationB() {
         </div>
       </div>
 
-      <Tabs value={f.activeTab} onValueChange={f.setActiveTab} className="flex flex-col min-h-[calc(100vh-88px)]">
+      <Tabs value={f.activeTab} onValueChange={f.setActiveTab} className="flex w-full min-w-0 flex-col min-h-[calc(100vh-88px)]">
         <div className="bg-white border-b border-slate-200 px-6">
           <TabsList className="h-auto bg-transparent p-0 gap-0 w-full justify-start rounded-none">
             {CR01_MAIN_TABS.map(({ label, value }) => (
@@ -223,7 +223,7 @@ export default function FormVariationB() {
           </TabsList>
         </div>
 
-        <TabsContent value={CR01_TAB.ESTIMATE} className="mt-0 flex-1 p-0">
+        <TabsContent value={CR01_TAB.ESTIMATE} className="mt-0 w-full min-w-0 flex-1 p-0">
           <div className="flex">
             <div className="flex-1 px-6 py-5 min-w-0">
               <Card className="border-slate-200 shadow-sm mb-5">
@@ -402,15 +402,15 @@ export default function FormVariationB() {
           </div>
         </TabsContent>
 
-        <TabsContent value={CR01_TAB.EQUIPMENT} className="mt-0 flex-1 bg-slate-50/50">
+        <TabsContent value={CR01_TAB.EQUIPMENT} className="mt-0 w-full min-w-0 flex-1 bg-slate-50/50">
           <EquipmentScheduleMock layout="cards" />
         </TabsContent>
 
-        <TabsContent value={CR01_TAB.LABOR} className="mt-0 flex-1 bg-slate-50/50">
+        <TabsContent value={CR01_TAB.LABOR} className="mt-0 w-full min-w-0 flex-1 bg-slate-50/50">
           <LaborBreakdownMock layout="cards" />
         </TabsContent>
 
-        <TabsContent value={CR01_TAB.SUMMARY} className="mt-0 flex-1 bg-slate-50/80">
+        <TabsContent value={CR01_TAB.SUMMARY} className="mt-0 w-full min-w-0 flex-1 bg-slate-50/80">
           <BidSummaryTabContent issues={f.issues} summaryRows={f.summaryRows} onGoToField={f.goToField} templateVersion={f.pinnedVersion} />
         </TabsContent>
       </Tabs>

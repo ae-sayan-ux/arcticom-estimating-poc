@@ -74,13 +74,13 @@ const IN_CELL_CENTER = `${IN_CELL} text-center`
 const IN_CELL_RIGHT = `${IN_CELL} text-right tabular-nums`
 const IN_CELL_MONO = `${IN_CELL} font-mono text-[11px]`
 
-/** Variation B: one spreadsheet row per line — Tag | Description | Model | Qty | Unit | Unit price | Extended | Lead */
+/** Variation B: Tag+Description stacked in one wide column | Model | qty cols… */
 const GRID_B_EQUIP =
-  "grid grid-cols-[56px_minmax(0,1.8fr)_minmax(0,1.15fr)_52px_44px_88px_88px_72px] gap-0"
+  "grid grid-cols-[minmax(0,2.55fr)_minmax(0,0.98fr)_52px_44px_88px_88px_72px] gap-0 min-w-0"
 
-/** Variation B labor: Trade | Class | Crew | Gross hrs | Factor | Net hrs | $/hr | Extended */
+/** Variation B labor: compact Trade; wider Class → Total */
 const GRID_B_LABOR =
-  "grid grid-cols-[minmax(0,2fr)_64px_48px_56px_48px_56px_72px_88px] gap-0"
+  "grid grid-cols-[12fr_14fr_9fr_13fr_10fr_11fr_14fr_17fr] gap-0 min-w-0"
 
 /** --- Variation A: structured tables (match Section 1 materials) --- */
 
@@ -95,10 +95,10 @@ function EquipmentTableA({ groups, onChange }) {
               Long-lead flagged in bid summary when &gt; 12 wks
             </Badge>
           </div>
-          <table className="w-full border-collapse">
+          <table className="w-full table-fixed border-collapse">
             <thead>
               <tr className="bg-slate-50 border-b border-slate-200">
-                {["Tag", "Description", "Model", "Qty", "Unit", "Unit price", "Extended", "Lead time"].map((h) => (
+                {["Tag / Description", "Model", "Qty", "Unit", "Unit price", "Extended", "Lead time"].map((h) => (
                   <th
                     key={h}
                     className={cn(
@@ -116,13 +116,13 @@ function EquipmentTableA({ groups, onChange }) {
                 const ext = extEquipment(row.qty, row.unit, row.unitPrice)
                 return (
                   <tr key={row.id} className={cn("group border-b border-slate-100 hover:bg-blue-50/30 transition-colors", i % 2 === 0 ? "bg-white" : "bg-slate-50/40")}>
-                    <td className="px-2 py-1.5 w-[7%]">
-                      <Input value={row.tag} onChange={(e) => onChange(g.key, row.id, "tag", e.target.value)} className={`${IN_CELL_MONO} w-full`} />
+                    <td className="px-2 py-1.5 w-[38%] align-top">
+                      <div className="flex flex-col gap-1 min-w-0 py-0.5">
+                        <Input value={row.tag} onChange={(e) => onChange(g.key, row.id, "tag", e.target.value)} className={`${IN_CELL_MONO} w-full min-w-0`} />
+                        <Input value={row.description} onChange={(e) => onChange(g.key, row.id, "description", e.target.value)} className={`${IN_CELL} w-full min-w-0`} />
+                      </div>
                     </td>
-                    <td className="px-2 py-1.5 w-[28%]">
-                      <Input value={row.description} onChange={(e) => onChange(g.key, row.id, "description", e.target.value)} className={`${IN_CELL} w-full`} />
-                    </td>
-                    <td className="px-2 py-1.5 w-[20%]">
+                    <td className="px-2 py-1.5 w-[17%]">
                       <Input value={row.model} onChange={(e) => onChange(g.key, row.id, "model", e.target.value)} className={`${IN_CELL} w-full text-slate-600`} />
                     </td>
                     <td className="px-2 py-1.5 w-[8%]">
@@ -131,11 +131,11 @@ function EquipmentTableA({ groups, onChange }) {
                     <td className="px-2 py-1.5 w-[7%]">
                       <Input value={row.unit} onChange={(e) => onChange(g.key, row.id, "unit", e.target.value)} className={`${IN_CELL_CENTER} w-full`} />
                     </td>
-                    <td className="px-2 py-1.5 w-[12%]">
+                    <td className="px-2 py-1.5 w-[11%]">
                       <Input value={row.unitPrice} onChange={(e) => onChange(g.key, row.id, "unitPrice", e.target.value)} className={`${IN_CELL_RIGHT} w-full`} />
                     </td>
-                    <td className="px-3 py-1.5 text-right text-xs font-medium text-slate-700 tabular-nums w-[12%]">{fmtMoney(ext)}</td>
-                    <td className="px-2 py-1.5 w-[10%]">
+                    <td className="px-3 py-1.5 text-right text-xs font-medium text-slate-700 tabular-nums w-[11%]">{fmtMoney(ext)}</td>
+                    <td className="px-2 py-1.5 w-[8%]">
                       <Input value={row.lead} onChange={(e) => onChange(g.key, row.id, "lead", e.target.value)} className={`${IN_CELL} w-full`} />
                     </td>
                   </tr>
@@ -168,7 +168,7 @@ function LaborTableA({ rows, onChange }) {
           <strong className="font-medium text-slate-700">Labor jurisdiction</strong> when selected.
         </span>
       </div>
-      <table className="w-full border-collapse">
+      <table className="w-full table-fixed border-collapse">
         <thead>
           <tr className="bg-slate-50 border-b border-slate-200">
             {["Trade / role", "Class", "Crew", "Gross hrs", "Factor", "Net hrs", "$/hr", "Extended"].map((h) => (
@@ -184,23 +184,23 @@ function LaborTableA({ rows, onChange }) {
             const ext = extLabor(row.crew, row.grossHrs, row.factor, row.rate)
             return (
               <tr key={row.id} className={cn("group border-b border-slate-100", i % 2 === 0 ? "bg-white" : "bg-slate-50/40")}>
-                <td className="px-2 py-1.5 w-[30%]">
-                  <Input value={row.trade} onChange={(e) => onChange(row.id, "trade", e.target.value)} className={`${IN_CELL} w-full`} />
-                </td>
                 <td className="px-2 py-1.5 w-[12%]">
+                  <Input value={row.trade} onChange={(e) => onChange(row.id, "trade", e.target.value)} className={`${IN_CELL} w-full min-w-0`} />
+                </td>
+                <td className="px-2 py-1.5 w-[14%]">
                   <Input value={row.classCode} onChange={(e) => onChange(row.id, "classCode", e.target.value)} className={`${IN_CELL_MONO} w-full`} />
                 </td>
-                <td className="px-2 py-1.5 w-[8%]">
+                <td className="px-2 py-1.5 w-[9%]">
                   <Input value={row.crew} onChange={(e) => onChange(row.id, "crew", e.target.value)} className={`${IN_CELL_RIGHT} w-full`} />
                 </td>
-                <td className="px-2 py-1.5 w-[10%]">
+                <td className="px-2 py-1.5 w-[13%]">
                   <Input value={row.grossHrs} onChange={(e) => onChange(row.id, "grossHrs", e.target.value)} className={`${IN_CELL_RIGHT} w-full`} />
                 </td>
-                <td className="px-2 py-1.5 w-[8%]">
+                <td className="px-2 py-1.5 w-[10%]">
                   <Input value={row.factor} onChange={(e) => onChange(row.id, "factor", e.target.value)} className={`${IN_CELL_RIGHT} w-full`} />
                 </td>
-                <td className="px-3 py-1.5 text-right text-xs font-medium text-slate-600 tabular-nums w-[10%]">{net ? net.toFixed(0) : "—"}</td>
-                <td className="px-2 py-1.5 w-[10%]">
+                <td className="px-3 py-1.5 text-right text-xs font-medium text-slate-600 tabular-nums w-[11%]">{net ? net.toFixed(0) : "—"}</td>
+                <td className="px-2 py-1.5 w-[14%]">
                   <div className="relative">
                     <Input
                       value={row.rate}
@@ -212,7 +212,7 @@ function LaborTableA({ rows, onChange }) {
                     )}
                   </div>
                 </td>
-                <td className="px-3 py-1.5 text-right text-xs font-semibold text-slate-800 tabular-nums w-[12%]">{fmtMoney(ext)}</td>
+                <td className="px-3 py-1.5 text-right text-xs font-semibold text-slate-800 tabular-nums w-[17%]">{fmtMoney(ext)}</td>
               </tr>
             )
           })}
@@ -235,7 +235,7 @@ function LaborTableA({ rows, onChange }) {
 /** --- Variation B: cards per group --- */
 
 function EquipmentCardsB({ groups, onChange }) {
-  const headers = ["Tag", "Description", "Model", "Qty", "Unit", "Unit cost", "Total", "Lead time"]
+  const headers = ["Tag / Description", "Model", "Qty", "Unit", "Unit cost", "Total", "Lead time"]
   return (
     <div className="space-y-4 w-full">
       {groups.map((g) => (
@@ -264,15 +264,13 @@ function EquipmentCardsB({ groups, onChange }) {
                   key={row.id}
                   className={cn(
                     GRID_B_EQUIP,
-                    "border-b border-slate-50 hover:bg-[#1D9E75]/4 transition-colors group",
+                    "border-b border-slate-50 hover:bg-[#1D9E75]/4 transition-colors group items-start",
                     i % 2 === 1 && "bg-slate-50/30"
                   )}
                 >
-                  <div className="px-2 py-1.5">
-                    <Input value={row.tag} onChange={(e) => onChange(g.key, row.id, "tag", e.target.value)} className={IN_CELL_MONO} />
-                  </div>
-                  <div className="px-2 py-1.5 min-w-0">
-                    <Input value={row.description} onChange={(e) => onChange(g.key, row.id, "description", e.target.value)} className={IN_CELL} />
+                  <div className="px-2 py-1.5 min-w-0 flex flex-col gap-1">
+                    <Input value={row.tag} onChange={(e) => onChange(g.key, row.id, "tag", e.target.value)} className={`${IN_CELL_MONO} w-full min-w-0`} />
+                    <Input value={row.description} onChange={(e) => onChange(g.key, row.id, "description", e.target.value)} className={`${IN_CELL} w-full min-w-0`} />
                   </div>
                   <div className="px-2 py-1.5 min-w-0">
                     <Input value={row.model} onChange={(e) => onChange(g.key, row.id, "model", e.target.value)} className={cn(IN_CELL, "text-slate-600")} />
@@ -348,7 +346,7 @@ function LaborCardsB({ rows, onChange }) {
                 )}
               >
                 <div className="px-2 py-1.5 min-w-0">
-                  <Input value={row.trade} onChange={(e) => onChange(row.id, "trade", e.target.value)} className={IN_CELL} />
+                  <Input value={row.trade} onChange={(e) => onChange(row.id, "trade", e.target.value)} className={`${IN_CELL} w-full min-w-0`} />
                 </div>
                 <div className="px-2 py-1.5">
                   <Input value={row.classCode} onChange={(e) => onChange(row.id, "classCode", e.target.value)} className={IN_CELL_MONO} />
@@ -394,13 +392,13 @@ function LaborCardsB({ rows, onChange }) {
 
 /** --- Variation C: dense grouped rows --- */
 
-const COLS_EQ = "grid-cols-[52px_minmax(0,1.6fr)_minmax(0,1fr)_44px_40px_72px_80px_72px]"
-const COLS_LB = "grid-cols-[minmax(0,2fr)_56px_40px_48px_40px_52px_56px_72px_80px]"
+const COLS_EQ = "grid-cols-[minmax(0,2.45fr)_minmax(0,0.92fr)_44px_40px_72px_80px_72px]"
+const COLS_LB = "grid-cols-[minmax(88px,0.82fr)_84px_56px_80px_56px_80px_96px_118px]"
 
 function GroupHeadC({ label, collapsed, onToggle, accent }) {
   return (
     <div className={cn(COLS_EQ, "grid border-l-4 bg-slate-100 cursor-pointer items-center", accent)} onClick={onToggle}>
-      <div className="col-span-8 flex items-center gap-1 px-2 py-1">
+      <div className="col-span-7 flex items-center gap-1 px-2 py-1">
         {collapsed ? <ChevronRight className="w-3 h-3 text-slate-400" /> : <ChevronDown className="w-3 h-3 text-slate-400" />}
         <span className="text-[11px] font-semibold text-slate-700 uppercase tracking-wide">{label}</span>
       </div>
@@ -413,9 +411,8 @@ function EquipmentDenseC({ groups, onChange }) {
   return (
     <div className="border border-slate-200 rounded-sm overflow-hidden w-full">
       <div className={`${COLS_EQ} grid bg-slate-50 border-b border-slate-200 text-[11px] font-semibold text-slate-500 px-2 py-1.5`}>
-        <span>Tag</span>
-        <span>Description</span>
-        <span>Model</span>
+        <span className="min-w-0">Tag / Description</span>
+        <span className="min-w-0">Model</span>
         <span className="text-right">Qty</span>
         <span className="text-center">U</span>
         <span className="text-right">$/u</span>
@@ -434,13 +431,15 @@ function EquipmentDenseC({ groups, onChange }) {
                     key={row.id}
                     className={cn(
                       COLS_EQ,
-                      "grid border-b border-slate-100 text-[12px] items-center px-1 py-0.5 hover:bg-[#1D9E75]/3 group transition-colors",
+                      "grid border-b border-slate-100 text-[12px] items-start px-1 py-0.5 hover:bg-[#1D9E75]/3 group transition-colors",
                       i % 2 === 1 && "bg-slate-50/50"
                     )}
                   >
-                    <input className="h-6 px-1 text-[12px] border border-transparent hover:border-slate-300 focus:border-[#1D9E75] rounded-sm font-mono" value={row.tag} onChange={(e) => onChange(g.key, row.id, "tag", e.target.value)} />
-                    <input className="h-6 px-1 text-[12px] border border-transparent hover:border-slate-300 focus:border-[#1D9E75] rounded-sm" value={row.description} onChange={(e) => onChange(g.key, row.id, "description", e.target.value)} />
-                    <input className="h-6 px-1 text-[12px] border border-transparent hover:border-slate-300 focus:border-[#1D9E75] rounded-sm text-slate-600" value={row.model} onChange={(e) => onChange(g.key, row.id, "model", e.target.value)} />
+                    <div className="min-w-0 flex flex-col gap-0.5 py-0.5">
+                      <input className="h-6 w-full min-w-0 px-1 text-[12px] border border-transparent hover:border-slate-300 focus:border-[#1D9E75] rounded-sm font-mono" value={row.tag} onChange={(e) => onChange(g.key, row.id, "tag", e.target.value)} />
+                      <input className="h-6 w-full min-w-0 px-1 text-[12px] border border-transparent hover:border-slate-300 focus:border-[#1D9E75] rounded-sm" value={row.description} onChange={(e) => onChange(g.key, row.id, "description", e.target.value)} />
+                    </div>
+                    <input className="h-6 px-1 text-[12px] border border-transparent hover:border-slate-300 focus:border-[#1D9E75] rounded-sm text-slate-600 min-w-0" value={row.model} onChange={(e) => onChange(g.key, row.id, "model", e.target.value)} />
                     <input className="h-6 px-1 text-[12px] border border-transparent hover:border-slate-300 focus:border-[#1D9E75] rounded-sm text-right" value={row.qty} onChange={(e) => onChange(g.key, row.id, "qty", e.target.value)} />
                     <input className="h-6 px-1 text-[12px] border border-transparent hover:border-slate-300 focus:border-[#1D9E75] rounded-sm text-center" value={row.unit} onChange={(e) => onChange(g.key, row.id, "unit", e.target.value)} />
                     <input className="h-6 px-1 text-[12px] border border-transparent hover:border-slate-300 focus:border-[#1D9E75] rounded-sm text-right tabular-nums" value={row.unitPrice} onChange={(e) => onChange(g.key, row.id, "unitPrice", e.target.value)} />

@@ -39,5 +39,5 @@
 
 /* shadcn Select portal needs this */
 [data-radix-popper-content-wrapper] {
-  z-index: 50 !important;
+  z-index: 100 !important;
 }
